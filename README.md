@@ -10,4 +10,3 @@ Breakdown of Roles by Tasks
 Dillon Gustafson: Analog to Digital conversion and amplification
 Cooper Froemming: output formatting/standardization, volume control
 Adan Wodzinski: input filtering/processing
-Abdullah Warsame: buttons/controls design
