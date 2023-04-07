@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-void init_DAC(void);
+void init_DAC(int data);
 
 void write_DAC(void);
 
