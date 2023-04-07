@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=
+SOURCEFILES_QUOTED_IF_SPACED=interrupt_based_button.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=
-POSSIBLE_DEPFILES=
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/interrupt_based_button.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/interrupt_based_button.o.d
 
 # Object Files
-OBJECTFILES=
+OBJECTFILES=${OBJECTDIR}/interrupt_based_button.o
 
 # Source Files
-SOURCEFILES=
+SOURCEFILES=interrupt_based_button.c
 
 
 
@@ -95,7 +95,19 @@ MP_LINKER_FILE_OPTION=,--script=p24FJ64GA002.gld
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+${OBJECTDIR}/interrupt_based_button.o: interrupt_based_button.c  .generated_files/flags/default/d8e7a97f2e6b90dacef6d805c9cc003248e7b25d .generated_files/flags/default/15f64965baa1f06e8b9d0f9f0dd76798cfd8de8b
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/interrupt_based_button.o.d 
+	@${RM} ${OBJECTDIR}/interrupt_based_button.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  interrupt_based_button.c  -o ${OBJECTDIR}/interrupt_based_button.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/interrupt_based_button.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 else
+${OBJECTDIR}/interrupt_based_button.o: interrupt_based_button.c  .generated_files/flags/default/4fbc71eca4c49973ff16ec24a64b3ca7dba4a58 .generated_files/flags/default/15f64965baa1f06e8b9d0f9f0dd76798cfd8de8b
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/interrupt_based_button.o.d 
+	@${RM} ${OBJECTDIR}/interrupt_based_button.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  interrupt_based_button.c  -o ${OBJECTDIR}/interrupt_based_button.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/interrupt_based_button.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 endif
 
 # ------------------------------------------------------------------------------------
