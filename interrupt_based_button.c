@@ -94,6 +94,34 @@ void init_button(){
     _IC1IF = 0;
 }
 
+/* FUNCTION: init_dac()
+ * ====================
+ * Initializes the MCP4821 DAC to communicate using SPI.
+ * PINS USED:
+ *              XXX - 
+ *              XXX - 
+ * **NOT CURRENTLY FINISHED**
+ */
+void init_DAC(void) {
+    // TODO:
+    //  -Setup SPIEN
+    //  -SISEL
+    //  -SPIxCON1
+    //  -SPIxIF
+    //  -SPIxIE
+    //  -MSTEN
+    //  -SPIROV
+}
+
+/* FUNCTION: write_DAC()
+ * =====================
+ * Writes a 
+ * **NOT CURRENTLY FINISHED**
+ */
+void write_DAC(void) {
+    
+}
+
 void __attribute__((interrupt, auto_psv)) _T2Interrupt(void) {
     _T2IF = 0; // turn the interrupt flag back to 0
     overflow++; // and increase the overflow by one
