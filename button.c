@@ -7,8 +7,8 @@ void init_button();
 volatile unsigned int overflow = 0;
 
 
-
-/*
+/* FUNCTION: init_button()
+ * ====================
  * initialize pin connected to the button as an input and adds a pull up resistor 
  * to provide a default read value. then map that pin to the input capture peripheral 
  * to trigger a section of code immediately when a button is pressed 
