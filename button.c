@@ -1,12 +1,13 @@
 
 #include "xc.h"
-#include <stdbool.h>
 
 void init_button();
-volatile bool State = 0; // state:0  use raw input 
-                         // state:1  use filtered data
-volatile unsigned int overflow=0;
-volatile unsigned long int time_click=0;
+
+volatile int State = 0; // state:0  use raw input 
+                        // state:1  use filtered data
+volatile unsigned int overflow=0; // overflow occurs after one second
+volatile unsigned long int time_current_click=0;
+volatile unsigned long int time_preivious_click=0;
 
 
 
@@ -58,8 +59,9 @@ void __attribute__((__interrupt__,__auto_psv__)) _IC1Interrupt(void){
 
     
     _IC1IF = 0; // reset the IC interupt flag
-    time_click = (unsigned long int)((unsigned long int)IC1BUF + (unsigned long int)overflow*(PR2+1));
-    if(time_click>125){ //to achieve a 2ms debounce delay must find (2/1000)(PR2+1)=125
-        State != State; // we intent to use the button as a toggle between the raw and filtered input
+    time_preivious_click=time_current_click
+    time_current_click = (unsigned long int)((unsigned long int)IC1BUF + (unsigned long int)overflow*(PR2+1));
+    if((time_current_click - time_preivious_click) >125){ //to achieve a 2ms debounce delay must find (2/1000)(PR2+1)=125
+        State = 1-State; // we intent to use the button as a toggle between the raw and filtered input
     }
 }
