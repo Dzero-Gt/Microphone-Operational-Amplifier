@@ -35,7 +35,7 @@ void init_button(){
     
     IC1CON = 0; 
     IC1CONbits.ICTMR = 1;  // ic1 uses tmr2
-    IEC0bits.IC1IE = 1;    // enable interrupt on ic1, turn off if using polling, keep on if using interupt
+    IEC0bits.IC1IE = 1;    // enable interrupt on ic1, turn off if using polling, keep on if using interrupt
     IC1CONbits.ICI = 0b00; // interrupt on every capture
     IC1CONbits.ICM = 0b010;// falling edge mode
     _IC1IF = 0;
@@ -58,7 +58,7 @@ void __attribute__((interrupt, auto_psv)) _T2Interrupt(void) {
 void __attribute__((__interrupt__,__auto_psv__)) _IC1Interrupt(void){
 
     
-    _IC1IF = 0; // reset the IC interupt flag
+    _IC1IF = 0; // reset the IC interrupt flag
     time_preivious_click=time_current_click
     time_current_click = (unsigned long int)((unsigned long int)IC1BUF + (unsigned long int)overflow*(PR2+1));
     if((time_current_click - time_preivious_click) >125){ //to achieve a 2ms debounce delay must find (2/1000)(PR2+1)=125
