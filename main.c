@@ -5,11 +5,7 @@
  * Created on March 15, 2023, 8:26 PM
  */
 
-/*
- * currently this is a basic program that can be adapted later
- * initializes button to pin rb8
- * it uses IC1 interrupt to recognize button input
- */
+
 
 
 #include "xc.h"
@@ -35,7 +31,7 @@
 #pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 //
 
-//button interupt code
+//button interrupt code
 volatile int State = 0; // state:0  use raw input 
                         // state:1  use filtered data
 volatile unsigned int overflow=0; // overflow occurs after one second
@@ -56,7 +52,7 @@ void __attribute__((__interrupt__,__auto_psv__)) _IC1Interrupt(void){
     time_preivious_click=time_current_click;
     time_current_click = (unsigned long int)((unsigned long int)IC1BUF + (unsigned long int)overflow*(PR2+1));
     if((time_current_click - time_preivious_click) >125){ //to achieve a 2ms debounce delay must find (2/1000)(PR2+1)=125
-        State = 1-State; // we intent to use the button as a toggle between the raw and filtered input
+        State = 1-State; // we intend to use the button as a toggle between the raw and filtered input
     }
 }
 
