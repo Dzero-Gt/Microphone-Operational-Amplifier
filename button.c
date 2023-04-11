@@ -3,11 +3,7 @@
 
 void init_button();
 
-volatile int State = 0; // state:0  use raw input 
-                        // state:1  use filtered data
-volatile unsigned int overflow=0; // overflow occurs after one second
-volatile unsigned long int time_current_click=0;
-volatile unsigned long int time_preivious_click=0;
+
 
 
 
@@ -47,21 +43,4 @@ void init_button(){
     _T2IE=1; // enable interupt 
     _T2IF=0; // set the interrupt flag to 0
     T2CONbits.TON=1;
-}
-
-void __attribute__((interrupt, auto_psv)) _T2Interrupt(void) {
-    _T2IF = 0; // turn the interrupt flag back to 0
-    overflow++; // and increase the overflow by one
-}
-
-
-void __attribute__((__interrupt__,__auto_psv__)) _IC1Interrupt(void){
-
-    
-    _IC1IF = 0; // reset the IC interrupt flag
-    time_preivious_click=time_current_click
-    time_current_click = (unsigned long int)((unsigned long int)IC1BUF + (unsigned long int)overflow*(PR2+1));
-    if((time_current_click - time_preivious_click) >125){ //to achieve a 2ms debounce delay must find (2/1000)(PR2+1)=125
-        State = 1-State; // we intent to use the button as a toggle between the raw and filtered input
-    }
 }
