@@ -1,10 +1,13 @@
 
 #include "xc.h"
 
+/*
+ * currently this is a basic program that can be adapted later
+ * initializes button to pin rb8
+ * it uses IC1 interrupt to recognize button input
+ */
+
 void init_button();
-
-
-
 
 
 /* FUNCTION: init_button()
