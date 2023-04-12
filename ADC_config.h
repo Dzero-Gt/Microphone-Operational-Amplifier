@@ -19,5 +19,7 @@ extern "C" {
 }
 #endif
 
+void ADC_init();
+
 #endif	/* ADC_CONFIG_H */
 
