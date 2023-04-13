@@ -10,7 +10,7 @@ void ADC_init(){
     AD1PCFG.PCFG0 = 0;
     
     AD1CON2bits.VCFG = 0b000;
-    AD1CON3bits.ADCS = 362; //for 44.1KHz sampling
+    AD1CON3bits.ADCS = 1; //for 44.1KHz sampling
     AD1CON1bits.SSRC = 0b010;
     AD1CON3bits.SAMC = 1;
     AD1CON1bits.FORM = 0b01;  //signed integer
@@ -26,4 +26,9 @@ void ADC_init(){
     T3CONbits.TCKPS = 0b00;
     PR3 = 362;
     T3CONbits.TON = 1;
+}
+
+void __attribute__ ((__interrupt__)) _ADC1Interrupt(void){
+    IFS0bits.AD1IF = 0;
+    // include conversion data here
 }
