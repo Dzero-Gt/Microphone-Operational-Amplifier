@@ -39,7 +39,21 @@ void setup();
 
 
 
-
+void __attribute__((__interrupt__,__auto_psv__)) _SPI2Interrupt(void)
+{
+    _RB7 = 1;
+    int temp;
+    _SPI2IF = 0;
+    temp = SPI2BUF; // just to clear the buffer and avoid setting off the 
+                    // overflow bit
+    LATBbits.LATB6 = 0;  // SPI transaction complete, give a low pulse on LDAC'
+        // to load the value from the input latch register to the DAC register.
+    // The DAC datasheet says that the pulse has to remain low for at least
+    // 100ns (p6 of the manual, the second table)
+    asm("nop");
+    asm("nop");
+    LATBbits.LATB6 = 1;
+}
 
 // delays in one ms increments
 void delay(unsigned int ms) {
