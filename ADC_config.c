@@ -1,9 +1,7 @@
 #include <p24FJ64GA002.h>
-
-
+#include "ADC_config.h"
 
 void ADC_init(){
-    
     
     TRISAbits.TRISA0 = 1;
     
@@ -28,7 +26,4 @@ void ADC_init(){
     T3CONbits.TON = 1;
 }
 
-void __attribute__ ((__interrupt__)) _ADC1Interrupt(void){
-    IFS0bits.AD1IF = 0;
-    // include conversion data here
-}
+

@@ -4,10 +4,6 @@
  *
  * Created on March 15, 2023, 8:26 PM
  */
-
-
-
-
 #include "xc.h"
 #include <stdlib.h>
 #include "button.h"
@@ -31,7 +27,6 @@
                                        // Fail-Safe Clock Monitor is enabled)
 #pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 //
-
 //button interrupt code
 volatile int State = 0; // state:0  use raw input 
                         // state:1  use filtered data
@@ -56,15 +51,6 @@ void __attribute__((__interrupt__,__auto_psv__)) _IC1Interrupt(void){
         State = 1-State; // we intend to use the button as a toggle between the raw and filtered input
     }
 }
-
-
-
-void setup();
-
-
-
-
-
 // delays in one ms increments
 void delay(unsigned int ms) {
     int i;
@@ -74,23 +60,28 @@ void delay(unsigned int ms) {
     }
     return;
 }
-
-
-
 void setup(){
     
     AD1PCFG = 0xffff;     //sets all pins to digital I/O
     CLKDIVbits.RCDIV=0;   // set frequency to 16 MHz 
 }
 
+void __attribute__ ((__interrupt__)) _ADC1Interrupt(void){
+    IFS0bits.AD1IF = 0;
+    // include conversion data here
+}
+
 int main(void) {
     setup();
     init_button();
     init_DAC();
+    ADC_init();
     
 
-    while (1);
+    while (1){}
     
     return -1;
 }
+
+
 
