@@ -7,7 +7,7 @@ void ADC_init(){
     
     TRISAbits.TRISA0 = 1;
     
-    AD1PCFG.PCFG0 = 0;
+    _PCFG0 = 0;
     
     AD1CON2bits.VCFG = 0b000;
     AD1CON3bits.ADCS = 1; //for 44.1KHz sampling
