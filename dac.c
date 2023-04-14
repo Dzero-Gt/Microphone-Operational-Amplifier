@@ -7,125 +7,51 @@
  * PINS USED:
  *              SDO2 (pin6) - 
  *              SCL2 (pin7) - 
- *              LDAC (pin15) -
- *              SS   (pin16) -  
  * **NOT CURRENTLY FINISHED**
  */
-//void init_DAC(void) {
-//    // Make sure !LDAC pin is low.
-//    SPI2STATbits.SPIEN = 0; // Disable SPI
-//    
-//    PORTBbits.RB2 = 1;      // These pins
-//    PORTBbits.RB3 = 1;      // are
-//    PORTBbits.RB6 = 1;      // all
-//    PORTBbits.RB7 = 1;      // digital
-//    
-//    TRISBbits.TRISB2 = 0;   // Set pin6 (SDO2) to output
-//    TRISBbits.TRISB3 = 0;   // Set pin7 (SCL2) to output
-//    TRISBbits.TRISB6 = 0;   // Set pin15 (LDAC) to output
-//    TRISBbits.TRISB7 = 0;   // Set pin16 (SS) to output
-//    
-//    __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
-////    RPOR1bits.RP2R = 10; //RB5->SPI1:SDO1; See Table 10-3 on P109 of the datasheet
-////    RPOR1bits.RP3R = 11; //RB4->SPI1:SCK1OUT;
-//    _RB3 = 10;   // Pin RB2 (pin6) --> SDO2; See Table 10-2 on P108 of the datasheet
-//    _RB2 = 11;   // Pin RB3 (pin7) --> SCK2
-//    __builtin_write_OSCCONL(OSCCON | 0x40); // lock   PPS
-//    
-//      
-//    SPI2CON1 = 0;   // Clear all previous SPI settings.
-//    SPI2CON2 = 0;
-//    SPI2STAT = 0;
-//    
-//    SPI2CON1bits.MODE16 = 1;    // 16-bit communcation.
-//    SPI2CON1bits.MSTEN = 1;     // Enable Master Mode
-//    SPI2CON1bits.CKP = 0;   // Clock is Idle on low, active on high.
-//    SPI2CON1bits.CKE = 1;   // Sample on rising edge.
-//    SPI2CON1bits.SPRE = 0b110;  // Secondary Prescaler = 2;
-//    SPI2CON1bits.PPRE = 0b11;   // Primary Prescaler = 1;
-//                                // Total clock period = 2*Tcy = 125 ns.
-//    
-//    SPI2STATbits.SISEL = 0b101; // Interrupt when last bit is shifted out of
-//                                // SPIxSR.
-//    
-//    //SPI2STATbits.SPIROV = 0;    // Clear SPI recieve overflow bit.
-//    SPI2STATbits.SPIEN = 1;     // Enable SPI
-//    
-//    _SSEN = 1;
-//    _RB7 = 1;
-//    
-//    _SPI2IF = 0;    // Clear SPI interrupt flag
-//    _SPI2IE = 1;    // Enable SPI interrupt.
-//    
-//    // 16 bits should take about 16 cycles.
-//}
-
 void init_DAC(void) {
+    // Make sure !LDAC pin is low.
     
-    PORTBbits.RB2 = 1;      // These pins
-    PORTBbits.RB3 = 1;      // are
-    PORTBbits.RB6 = 1;      // all
-    PORTBbits.RB7 = 1;      // digital
-    
-    TRISBbits.TRISB2 = 0; // SCK
-    TRISBbits.TRISB3 = 0; // SDO
-    TRISBbits.TRISB6 = 0; // this will be the DAC /LDAC. I assume /CS is hardwired to GND
-    TRISBbits.TRISB7 = 0; // SS (Slave Select Bit) Pulled low when transmitting data.
-
-    // Peripheral Pin Select 
-    // Ver 1.25 or later
     __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
-    RPOR1bits.RP3R = 10;   //RB5->SPI1:SDO1; See Table 10-3 on P109 of the datasheet
-    RPOR1bits.RP2R = 11;   //RB4->SPI1:SCK1OUT;
+    _RP2R = 10;   // Pin RP2 --> SDO2; See Table 10-2 on P108 of the datasheet
+    _RP3R = 11;   // Pin RP3 --> SCK2
     __builtin_write_OSCCONL(OSCCON | 0x40); // lock   PPS
     
-    SPI2CON1 = 0;
-    SPI2CON1bits.MSTEN = 1;  // master mode
-    SPI2CON1bits.MODE16 = 1; // sixteen bits
-    SPI2CON1bits.CKE = 1;
-    SPI2CON1bits.CKP = 0;
-    SPI2CON1bits.SPRE = 0b110; // secondary prescaler = 2
-    SPI2CON1bits.PPRE = 0b11;  // primary prescaler = 1;
-    //SPI1CON1bits.PPRE = 0b01;  // primary prescaler = 16;
+    _SPI2IF = 0;    // Clear SPI interrupt flag
+    _SPI2IE = 1;    // Enable SPI interrupt.
+      
+    SPI2CON1 = 0;   // Clear all previous SPI settings.
     SPI2CON2 = 0;
-    SPI2STAT = 0;
-    SPI2STATbits.SISEL = 0b101; // IF set when last bit is shifted out
-                                // That means the SPI xfer is complete.
-    SPI2STATbits.SPIEN = 1;
-
-    // Enabling SS
-    SPI2CON1bits.SSEN = 1;
-    _RB7 = 1;
-
-    IPC1bits.T2IP = 5;
-    IEC0bits.T2IE = 1;
-    _SPI2IF = 0;
-    _SPI2IE = 1;
+    
+    SPI2CON1bits.MODE16 = 1;    // 16-bit communcation.
+    SPI2CON1bits.MSTEN = 1;     // Enable Master Mode
+    SPI2CON1bits.CKP = 0;   // Clock is Idle on low, active on high.
+    SPI2CON1bits.SPRE = 0b110;  // Secondary Prescaler = 2;
+    SPI2CON1bits.PPRE = 0b11;   // Primary Prescaler = 1;
+                                // Total clock period = 2*Tcy = 125 ns.
+    
+    SPI2STATbits.SPIROV = 0;    // Clear SPI recieve overflow bit.
+    SPI2STATbits.SPIEN = 1;     // Enable SPI
+    
+    // 16 bits should take about 16 cycles.
 }
 
 /* FUNCTION: write_DAC()
  * =====================
  * Writes a 
  * **NOT CURRENTLY FINISHED**
- * INPUTS:
- *          int data - 
- *          int gain - 0 or 1
  */
-void write_DAC(int data,char gain) {
+void write_DAC(int data) {
     // Make !CS pin low when transmitting data, high when not transmitting data.
     
     // Protocol:
     //      -Grab data from circular buffer.
     //      -Add data to SPIxBuffer
     //      -On interrupt update circular buffer.
-        
+    
     // DAC has 4 configuration bits, and then 12 data bits.
-    // 0XGS dddd dddd dd00
+    // 0XGS dddd dddd ddXX
     // G = gain, (0 = 2.048V, 1 = 4.096V)
     // S = Shutdown (1 = Active, 0 = Inactive)
     
-    _RB7 = 0; // SS is low.
-    int output = 0b0001000000000000 + (gain << 13) + (data << 2);
-    SPI2BUF = output;
-    return;
 }
