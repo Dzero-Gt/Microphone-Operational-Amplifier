@@ -85,6 +85,7 @@ void __attribute__ ((__interrupt__, __auto_psv__)) _ADC1Interrupt(void){
     IFS0bits.AD1IF = 0;
     int data = ADC1BUF0;
     write_DAC(data, 1);
+    //write_DAC(0b1111111111, 1);
     // include conversion data here
 }
 
