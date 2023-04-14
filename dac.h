@@ -13,7 +13,7 @@ extern "C" {
 #endif
 
 void init_DAC(void);
-void write_DAC(int data);
+void write_DAC(int data, char gain);
 
 #ifdef	__cplusplus
 }
