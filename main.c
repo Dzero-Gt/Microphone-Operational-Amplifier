@@ -66,8 +66,10 @@ void setup(){
     CLKDIVbits.RCDIV=0;   // set frequency to 16 MHz 
 }
 
-void __attribute__ ((__interrupt__)) _ADC1Interrupt(void){
+void __attribute__ ((__interrupt__, __auto_psv__)) _ADC1Interrupt(void){
     IFS0bits.AD1IF = 0;
+    int data = ADC1BUF0;
+    write_DAC(data);
     // include conversion data here
 }
 
