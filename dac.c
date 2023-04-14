@@ -129,15 +129,13 @@ void write_DAC(int data,char gain) {
     int DACMASK_high = 0b0001111111111111;
     int DACMASK_low = 0b0011111111111111;
     int output = data;
-    
     if(gain == 1) {
-        int output &= DACMASK_low;
+        output &= DACMASK_low;
     }
     else {
-        int output &= DACMASK_high;
+        output &= DACMASK_high;
     }
-    int output &= DACMASK;
-    int output |= DACBITS;
+    output |= DACBITS;
     SPI2BUF = output;
     return;
 }
