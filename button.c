@@ -3,7 +3,7 @@
 
 /*
  * currently this is a basic program that can be adapted later
- * initializes button to pin rb8
+ * initializes button to pin RB8
  * it uses IC1 interrupt to recognize button input
  */
 
@@ -24,7 +24,7 @@ void init_button(){
     
     TRISBbits.TRISB8 = 1; // pin input for our button;
     
-    TRISBbits.TRISB8 =1; // rb8 is input pin for button
+    TRISBbits.TRISB8 =1; // RB8 is input pin for button
     CNPU2bits.CN22PUE=1; //Pull up resistor on RB8 (button)
     
     __builtin_write_OSCCONL(OSCCON & 0xbf); // (unlock)
@@ -33,17 +33,17 @@ void init_button(){
     
     
     IC1CON = 0; 
-    IC1CONbits.ICTMR = 1;  // ic1 uses tmr2
-    IEC0bits.IC1IE = 1;    // enable interrupt on ic1, turn off if using polling, keep on if using interrupt
+    IC1CONbits.ICTMR = 1;  // IC1 uses TMR2
+    IEC0bits.IC1IE = 1;    // enable interrupt on IC1, turn off if using polling, keep on if using interrupt
     IC1CONbits.ICI = 0b00; // interrupt on every capture
     IC1CONbits.ICM = 0b010;// falling edge mode
     _IC1IF = 0;
     
     T2CON = 0x0010;
-    T2CONbits.TCKPS=0b11; // prescaler of 1:256 //
+    T2CONbits.TCKPS=0b11; // prescaler of 1:256 
     PR2=62499; // 1 second period
     TMR2=0;
-    _T2IE=1; // enable interupt 
+    _T2IE=1; // enable interrupt 
     _T2IF=0; // set the interrupt flag to 0
     T2CONbits.TON=1;
 }
