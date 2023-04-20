@@ -78,7 +78,7 @@ void write_DAC(int data,char gain) {
     int DACBITS = 0b0001000000000000;
     int DACMASK_high = 0b0001111111111111;
     int DACMASK_low = 0b0011111111111111;
-    int output = data;
+    int output = (data << 2);
     if(gain == 1) {
         output &= DACMASK_low;
     }
