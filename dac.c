@@ -9,57 +9,7 @@
  *              SCL2 (pin7) - 
  *              LDAC (pin15) -
  *              SS   (pin16) -  
- * **NOT CURRENTLY FINISHED**
  */
-//void init_DAC(void) {
-//    // Make sure !LDAC pin is low.
-//    SPI2STATbits.SPIEN = 0; // Disable SPI
-//    
-//    PORTBbits.RB2 = 1;      // These pins
-//    PORTBbits.RB3 = 1;      // are
-//    PORTBbits.RB6 = 1;      // all
-//    PORTBbits.RB7 = 1;      // digital
-//    
-//    TRISBbits.TRISB2 = 0;   // Set pin6 (SDO2) to output
-//    TRISBbits.TRISB3 = 0;   // Set pin7 (SCL2) to output
-//    TRISBbits.TRISB6 = 0;   // Set pin15 (LDAC) to output
-//    TRISBbits.TRISB7 = 0;   // Set pin16 (SS) to output
-//    
-//    __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
-////    RPOR1bits.RP2R = 10; //RB5->SPI1:SDO1; See Table 10-3 on P109 of the datasheet
-////    RPOR1bits.RP3R = 11; //RB4->SPI1:SCK1OUT;
-//    _RB3 = 10;   // Pin RB2 (pin6) --> SDO2; See Table 10-2 on P108 of the datasheet
-//    _RB2 = 11;   // Pin RB3 (pin7) --> SCK2
-//    __builtin_write_OSCCONL(OSCCON | 0x40); // lock   PPS
-//    
-//      
-//    SPI2CON1 = 0;   // Clear all previous SPI settings.
-//    SPI2CON2 = 0;
-//    SPI2STAT = 0;
-//    
-//    SPI2CON1bits.MODE16 = 1;    // 16-bit communcation.
-//    SPI2CON1bits.MSTEN = 1;     // Enable Master Mode
-//    SPI2CON1bits.CKP = 0;   // Clock is Idle on low, active on high.
-//    SPI2CON1bits.CKE = 1;   // Sample on rising edge.
-//    SPI2CON1bits.SPRE = 0b110;  // Secondary Prescaler = 2;
-//    SPI2CON1bits.PPRE = 0b11;   // Primary Prescaler = 1;
-//                                // Total clock period = 2*Tcy = 125 ns.
-//    
-//    SPI2STATbits.SISEL = 0b101; // Interrupt when last bit is shifted out of
-//                                // SPIxSR.
-//    
-//    //SPI2STATbits.SPIROV = 0;    // Clear SPI recieve overflow bit.
-//    SPI2STATbits.SPIEN = 1;     // Enable SPI
-//    
-//    _SSEN = 1;
-//    _RB7 = 1;
-//    
-//    _SPI2IF = 0;    // Clear SPI interrupt flag
-//    _SPI2IE = 1;    // Enable SPI interrupt.
-//    
-//    // 16 bits should take about 16 cycles.
-//}
-
 void init_DAC(void) {
     
     PORTBbits.RB2 = 1;      // These pins
