@@ -52,6 +52,17 @@ void __attribute__((__interrupt__,__auto_psv__)) _IC1Interrupt(void){
     if((time_current_click - time_preivious_click) >125){ //to achieve a 2mS debounce delay must find (2/1000)(PR2+1)=125
         State = 1-State; // we intend to use the button as a toggle between the raw and filtered input
     }
+    if (State){
+        TRISAbits.TRISA0 = 0;
+        TRISAbits.TRISA1 = 1;
+            
+    }
+    if (!State){
+        TRISAbits.TRISA0 = 1;
+        TRISAbits.TRISA1 = 0;
+    }
+        
+    
 }
 
 //SPI DAC interrupt
