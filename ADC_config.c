@@ -9,8 +9,7 @@ void ADC_init(){
     _PCFG0 = 0;
     _PCFG1 = 0;
     
-    _CSSL0 = 1;
-    _CSSL1 = 0;
+    AD1CHS = 0x0001;
     
     AD1CON2bits.VCFG = 0b000;
     AD1CON3bits.ADCS = 1; //for 44.1KHz sampling
