@@ -58,7 +58,7 @@ void __attribute__((__interrupt__,__auto_psv__)) _IC1Interrupt(void){
             
     }
     if (!State){
-          AD1CHS = 0x0002;
+          AD1CHS = 0x0000;
     }
         
     
