@@ -114,13 +114,23 @@ int main(void) {
     init_DAC();
     ADC_init();
 
+    TRISBbits.TRISB9 = 0;
+    LATBbits.LATB9=0;
+    
     while (1){
-    /*
-     * Create a new setup function for the LED
-     * hook the LED up to a LATB pin and the positive terminal of the breadboard
-     * If state is 1 turn light on, LATB register=0
-     * If state is 0 turn external light off. LATB register=1
-     */
+        /*
+         * Create a new setup function for the LED
+         * hook the LED up to a LATB pin and the positive terminal of the breadboard
+         * If state is 1 turn light on, LATB register=0
+         * If state is 0 turn external light off. LATB register=1
+         */
+        if(State){
+            LATBbits.LATB9=1;
+        }
+        if(!State){
+            LATBbits.LATB9=0;
+        }
+
     }
     
     return -1;
