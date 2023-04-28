@@ -53,13 +53,14 @@ void __attribute__((__interrupt__,__auto_psv__)) _IC1Interrupt(void){
         State = 1-State; // we intend to use the button as a toggle between the raw and filtered input
     }
     if (State){
-        TRISAbits.TRISA0 = 0;
-        TRISAbits.TRISA1 = 1;
+          _CSSL0 = 0;
+          _CSSL1 = 1;
+        
             
     }
     if (!State){
-        TRISAbits.TRISA0 = 1;
-        TRISAbits.TRISA1 = 0;
+          _CSSL0 = 1;
+          _CSSL1 = 0;
     }
         
     
