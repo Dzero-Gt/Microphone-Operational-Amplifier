@@ -9,7 +9,7 @@ void ADC_init(){
     _PCFG0 = 0;
     _PCFG1 = 0;
     
-    AD1CHS = 0x0000;
+//    AD1CHS = 0x0000; // Adan -  commented out this line this was causing the ringing idk why
     
     AD1CON2bits.VCFG = 0b000;
     AD1CON3bits.ADCS = 1; //for 44.1KHz sampling

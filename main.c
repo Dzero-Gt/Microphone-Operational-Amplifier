@@ -34,6 +34,7 @@
 //IC button  toggle
 volatile int State = 0; // state:0  use raw input 
                         // state:1  use filtered data
+
 volatile unsigned int overflow=0; // overflow occurs after one second
 volatile unsigned long int time_current_click=0;
 volatile unsigned long int time_preivious_click=0;
@@ -124,10 +125,10 @@ int main(void) {
          * If state is 0 turn external light off. LATB register=1
          */
         if(State){
-            LATBbits.LATB9=1;
+            LATBbits.LATB9=0;
         }
         if(!State){
-            LATBbits.LATB9=0;
+            LATBbits.LATB9=1;
         }
 
     }
