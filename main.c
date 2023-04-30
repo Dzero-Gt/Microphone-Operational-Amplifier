@@ -54,12 +54,12 @@ void __attribute__((__interrupt__,__auto_psv__)) _IC1Interrupt(void){
         State = 1-State; // we intend to use the button as a toggle between the raw and filtered input
     }
     if (State){
-        AD1CHS = 0x0001;
+        AD1CHS = 0x0001; //switch to filtered input
         
             
     }
     if (!State){
-          AD1CHS = 0x0000;
+          AD1CHS = 0x0000; //switch to unfiltered input
     }
         
     
