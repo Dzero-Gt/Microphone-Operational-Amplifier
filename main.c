@@ -114,6 +114,7 @@ int main(void) {
     init_DAC();
     ADC_init();
 
+    //sets start led state
     TRISBbits.TRISB9 = 0;
     LATBbits.LATB9=0;
     

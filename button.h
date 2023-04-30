@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-void init_button();
+void init_button();//IC button  toggle
 
 
 #ifdef	__cplusplus
