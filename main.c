@@ -33,6 +33,7 @@
 //IC button  toggle
 volatile int State = 0; // state:0  use raw input 
                         // state:1  use filtered data
+
 volatile unsigned int overflow=0; // overflow occurs after one second
 volatile unsigned long int time_current_click=0;
 volatile unsigned long int time_preivious_click=0;
@@ -52,13 +53,12 @@ void __attribute__((__interrupt__,__auto_psv__)) _IC1Interrupt(void){
         State = 1-State; // we intend to use the button as a toggle between the raw and filtered input
     }
     if (State){
-        TRISAbits.TRISA0 = 0;
-        TRISAbits.TRISA1 = 1;
+        AD1CHS = 0x0001; //switch to filtered input
+        
             
     }
     if (!State){
-        TRISAbits.TRISA0 = 1;
-        TRISAbits.TRISA1 = 0;
+          AD1CHS = 0x0000; //switch to unfiltered input
     }
         
     
@@ -113,7 +113,25 @@ int main(void) {
     init_DAC();
     ADC_init();
 
-    while (1){}
+    //sets start led state
+    TRISBbits.TRISB9 = 0;
+    LATBbits.LATB9=0;
+    
+    while (1){
+        /*
+         * Create a new setup function for the LED
+         * hook the LED up to a LATB pin and the positive terminal of the breadboard
+         * If state is 1 turn light on, LATB register=0
+         * If state is 0 turn external light off. LATB register=1
+         */
+        if(State){
+            LATBbits.LATB9=0;
+        }
+        if(!State){
+            LATBbits.LATB9=1;
+        }
+
+    }
     
     return -1;
 }
