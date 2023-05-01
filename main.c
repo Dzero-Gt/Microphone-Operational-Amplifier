@@ -8,7 +8,6 @@
 #include "xc.h"
 #include <stdlib.h>
 #include "button.h"
-#include "ADC_config.h"
 #include "dac.h"
 #include "ADC_config.h"
 
