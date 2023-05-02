@@ -5,6 +5,7 @@ Microphone Filter Controller is a C library that provides the functionality to t
 
 ## Hardware Description
 - PIC24FJ64GA002: <a href="https://ww1.microchip.com/downloads/en/devicedoc/39881e.pdf">Datasheet<a>
+- Electret MAX9814 Microphone: <a href="https://cdn-shop.adafruit.com/datasheets/MAX9814.pdf">Datasheet<a>
 
 ## Full Documentation
 [Provide a comprehensive list of all public functions in the library, including their parameters, return types, and any other relevant information. Organize the functions into logical groups and provide links to more detailed documentation for each function if necessary.]
