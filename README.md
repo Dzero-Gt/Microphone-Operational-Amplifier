@@ -66,9 +66,20 @@ Microphone Filter Controller is a C library that provides the functionality to t
 #include "ADC_config.h"
 #include "button.h"
 
+  
+//ADC Interrupt
+void __attribute__ ((__interrupt__, __auto_psv__)) _ADC1Interrupt(void){
+    IFS0bits.AD1IF = 0;
+    int data = ADC1BUF0;
+    write_DAC(data, 10, 1);
+    //write_DAC(0b1111111111, 2, 1);
+    // include conversion data here
+  
+  
 int main() {
-    // [Call a simple function from the library and print the output]
-    return 0;
+    while (1){}
+  
+  return(-1);
 }
 
 ```
@@ -82,8 +93,52 @@ int main() {
 #include "ADC_config.h"
 #include "button.h"
 
-int main() {
-    // [Call a simple function from the library and print the output]
+  
+  
+    //SPI DAC interrupt
+    void __attribute__((__interrupt__,__auto_psv__)) _SPI2Interrupt(void)
+    {
+    _RB7 = 1;
+    int temp;
+    _SPI2IF = 0;
+    temp = SPI2BUF; // just to clear the buffer and avoid setting off the 
+                    // overflow bit
+    LATBbits.LATB6 = 0;  // SPI transaction complete, give a low pulse on LDAC'
+        // to load the value from the input latch register to the DAC register.
+    // The DAC datasheet says that the pulse has to remain low for at least
+    // 100ns (p6 of the manual, the second table)
+    asm("nop");
+    asm("nop");
+    LATBbits.LATB6 = 1;
+  }
+  
+ void __attribute__ ((__interrupt__, __auto_psv__)) _ADC1Interrupt(void){
+    IFS0bits.AD1IF = 0;
+    int data = ADC1BUF0;
+    write_DAC(data, 10, 1);
+    //write_DAC(0b1111111111, 2, 1);
+    // include conversion data here
+  
+  int main() {
+     //sets start led state
+    TRISBbits.TRISB9 = 0;
+    LATBbits.LATB9=0;
+    
+    while (1){
+        /*
+         * Create a new setup function for the LED
+         * hook the LED up to a LATB pin and the positive terminal of the breadboard
+         * If state is 1 turn light on, LATB register=0
+         * If state is 0 turn external light off. LATB register=1
+         */
+        if(State){
+            LATBbits.LATB9=0;
+        }
+        if(!State){
+            LATBbits.LATB9=1;
+        }
+
+    }
     return 0;
 }
 
