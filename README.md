@@ -4,7 +4,7 @@
 Microphone Filter Controller is a C library that provides the functionality to take analog audio input from an Electret Microphone amplifier, filters it based on selector/s for varying bandwidths perform Analog to Digital conversion (ADC), process, and amplify, perform Digital to Analog conversion (DAC), and output to a speaker or other device.
 
 ## Hardware Description
-[Describe the hardware that the library interacts with. Include information such as device(s), part numbers, links to datasheets or product pages, and any other relevant details.]
+- PIC24FJ64GA002: <a href="https://ww1.microchip.com/downloads/en/devicedoc/39881e.pdf">Datasheet<a>
 
 ## Full Documentation
 [Provide a comprehensive list of all public functions in the library, including their parameters, return types, and any other relevant information. Organize the functions into logical groups and provide links to more detailed documentation for each function if necessary.]
