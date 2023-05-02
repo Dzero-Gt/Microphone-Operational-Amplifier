@@ -66,6 +66,10 @@ Microphone Filter Controller is a C library that provides the functionality to t
 #include "ADC_config.h"
 #include "button.h"
 
+void setup(){
+  AD1PCFG = 0xffff;     //sets all pins to digital I/O
+  CLKDIVbits.RCDIV=0;   // set frequency to 16 MHz 
+}
   
 //ADC Interrupt
 void __attribute__ ((__interrupt__, __auto_psv__)) _ADC1Interrupt(void){
@@ -76,6 +80,12 @@ void __attribute__ ((__interrupt__, __auto_psv__)) _ADC1Interrupt(void){
   
   
 int main() {
+  
+  setup();
+    init_button();
+    init_DAC();
+    ADC_init();
+  
     while (1){}
   
   return(-1);
@@ -117,7 +127,19 @@ int main() {
     write_DAC(data, 10, 1);
     // include any signal additional signal processing here
   
+  
+  void setup(){
+    AD1PCFG = 0xffff;     //sets all pins to digital I/O
+    CLKDIVbits.RCDIV=0;   // set frequency to 16 MHz 
+  }
+  
   int main() {
+  
+    setup();
+      init_button();
+      init_DAC();
+      ADC_init();
+  
      //sets start led state
     TRISBbits.TRISB9 = 0;
     LATBbits.LATB9=0;
