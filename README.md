@@ -48,6 +48,15 @@ Microphone Filter Controller is a C library that provides the functionality to t
 - `return type function6(arg1: type, arg2: type)`
   - [Description of function6]
 
+  
+### Misc
+  - `void delay(unsigned int ms):`
+    - Delay function takes an unsigned integer "ms" as an input parameter, representing the number of milliseconds to delay the program execution. Function uses       looping assembly code to achieve 1ms delay. Code only works properly at 16MHz clock speed.
+    - Input Parameters:
+      - "ms": an unsigned integer that represents the number of milliseconds to delay the program execution.
+    - Output:
+      - This function does not return any value.
+  
 ## Basic Usage Example
 [Provide a brief code snippet that demonstrates the most basic usage of the library. This should be a simple example that allows users to quickly test the functionality of the library.]
 
