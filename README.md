@@ -57,7 +57,7 @@ Microphone Filter Controller is a C library that provides the functionality to t
       - This function does not return any value.
   
 ## Basic Usage Example
-[Provide a brief code snippet that demonstrates the most basic usage of the library. This should be a simple example that allows users to quickly test the functionality of the library.]
+Runs all of the basic initialization functions required to set up usage of the DAC, the ADC, and the button. Pin requirements are detailed under "Full Documentation"
 
 ```c
 #include <stdio.h>
@@ -92,7 +92,7 @@ int main() {
 
 ```
 ##Advanced Usage Example
-[Provide a more complex example that covers all the major features and functions of the library. This should be a more realistic use case that demonstrates the power and flexibility of the library.]
+Sets up the DAC, ADC, and Button, including the LED state tracking for button filter control.
 
 ```c
 #include "xc.h"
