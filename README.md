@@ -91,7 +91,7 @@ int main() {
 }
 
 ```
-##Advanced Usage Example
+## Advanced Usage Example
 Sets up the DAC, ADC, and Button, including the LED state tracking for button filter control.
 
 ```c
