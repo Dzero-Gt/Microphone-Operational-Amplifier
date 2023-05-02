@@ -82,11 +82,11 @@ void __attribute__ ((__interrupt__, __auto_psv__)) _ADC1Interrupt(void){
 int main() {
   
   setup();
-    init_button();
-    init_DAC();
-    ADC_init();
+  init_button();
+  init_DAC();
+  ADC_init();
   
-    while (1){}
+  while (1){}
   
   return(-1);
 }
@@ -136,9 +136,9 @@ int main() {
   int main() {
   
     setup();
-      init_button();
-      init_DAC();
-      ADC_init();
+    init_button();
+    init_DAC();
+    ADC_init();
   
      //sets start led state
     TRISBbits.TRISB9 = 0;
