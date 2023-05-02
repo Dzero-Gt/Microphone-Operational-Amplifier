@@ -43,11 +43,41 @@ Microphone Filter Controller is a C library that provides the functionality to t
     - <b>lowGain:</b> An integer value representing the gain level of the DAC. Set to 0 for 100% gain, and 1 for 50% gain.
 
 ### Button
-- `return_type function5(arg1: type, arg2: type)`
-  - [Description of function5]
-- `return type function6(arg1: type, arg2: type)`
-  - [Description of function6]
+- `void init_button()`
+  - [will add info later]
+- Interrupts
+  ```c
+  
+  // volatile variables for use in ISR's
+  volatile int State = 0; // state:0  use raw input 
+                        // state:1  use filtered data
 
+  volatile unsigned int overflow=0; // overflow occurs after one second
+  volatile unsigned long int time_current_click=0;
+  volatile unsigned long int time_preivious_click=0;
+  
+  //T2 interrupt we use overflow in Ic interrupt for debouncing
+  void __attribute__((interrupt, auto_psv)) _T2Interrupt(void) {
+      _T2IF = 0; // turn the interrupt flag back to 0
+      overflow++; // and increase the overflow by one
+  }
+  //IC1 Interrupt is used for button debouncing as well as ADC mux bit selection
+  void __attribute__((__interrupt__,__auto_psv__)) _IC1Interrupt(void){
+
+    _IC1IF = 0; // reset the IC interrupt flag
+    time_preivious_click=time_current_click;
+    time_current_click = (unsigned long int)((unsigned long int)IC1BUF + (unsigned long int)overflow*(PR2+1));
+    if((time_current_click - time_preivious_click) >125){ //to achieve a 2mS debounce delay must find (2/1000)(PR2+1)=125
+        State = 1-State; // we intend to use the button as a toggle between the raw and filtered input
+    }
+    if (State){
+        AD1CHS = 0x0001; //switch to filtered input (pin AN1)     
+    }
+    if (!State){
+          AD1CHS = 0x0000; //switch to unfiltered input (pin AN0)
+    } 
+  }
+  ```
   
 ### Misc
   - `void delay(unsigned int ms):`
