@@ -10,10 +10,18 @@ Microphone Filter Controller is a C library that provides the functionality to t
 [Provide a comprehensive list of all public functions in the library, including their parameters, return types, and any other relevant information. Organize the functions into logical groups and provide links to more detailed documentation for each function if necessary.]
 
 ### ADC
-- `return_type function1(arg1: type, arg2: type)`
-  - [Description of function1]
-- `return_type function2(arg1: type, arg2: type)`
-  - [Description of function2]
+- `ADC_init():`
+  - ADC_init() initializes and enables the Analog to Digital Converter (ADC) module for the microcontroller. No parameters or inputs are involved
+  - <b>Internal Functionality:</b>
+    - Sets TRISAbits.TRISA0 and TRISAbits.TRISA1 to input mode.
+    - Enables analog band gap voltage reference for both input pins.
+    - Configures the ADC to use Vdd as the maximum voltage and Vss as the minimum voltage reference.
+    - Configures TAD to allow for maximum conversion speed at 16MHz.
+    - Configures the ADC to output signed integer format.
+    - Set the sample timer to startimmediately after the conversion is complete.
+    - Configures the ADC to generate an interrupt after every conversion.
+    - Initializes Timer3 for the interrupt-based conversions.
+    - Clears the ADC interrupt flag and enables the ADC interrupt.
 
 ### DAC
 - `void init_DAC(void);`
