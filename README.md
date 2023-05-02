@@ -22,6 +22,8 @@ Microphone Filter Controller is a C library that provides the functionality to t
     - Configures the ADC to generate an interrupt after every conversion.
     - Initializes Timer3 for the interrupt-based conversions.
     - Clears the ADC interrupt flag and enables the ADC interrupt.
+ -  `ADC1Interrupt():`
+    - Interrupt service routine that handles ADC1 interrupts. All signal processing and SPI output to the DAC is handled within this interrupt.
 
 ### DAC
 - `void init_DAC(void);`
