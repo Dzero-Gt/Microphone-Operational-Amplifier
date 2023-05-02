@@ -9,7 +9,6 @@ Microphone Filter Controller is a C library that provides the functionality to t
 - MCP4821 DAC: <a href="https://datasheet.lcsc.com/lcsc/2109221453_Microchip-Tech-MCP4821-E-MS_C636207.pdf">Datasheet<a>
 
 ## Full Documentation
-[Provide a comprehensive list of all public functions in the library, including their parameters, return types, and any other relevant information. Organize the functions into logical groups and provide links to more detailed documentation for each function if necessary.]
 
 ### ADC
 - `ADC_init():`
