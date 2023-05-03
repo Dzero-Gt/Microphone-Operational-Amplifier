@@ -44,7 +44,14 @@ Microphone Filter Controller is a C library that provides the functionality to t
 
 ### Button
 - `void init_button()`
-  - [will add info later]
+  - `init_button()` Initializes a button whose primary purpose is that of a toggle.
+  - Sets up an interrupt service routine `(ISR)` using an Input Capture `(IC)` module to capture the falling edge of the button press. 
+  - Additionally, it is configuring a Timer 2 `(TMR2)` module to generate a periodic interrupt at 1 second intervals.
+  
+  - Set RB8 as an input pin `(TRISBbits.TRISB8 = 1)`
+  - Enable the internal pull-up resistor on RB8 `(CNPU2bits.CN22PUE=1)`
+  - Configure IC1 to use Pin RP8/RB8 as an input, set the interrupt on every falling edge and enable its interrupt 
+  - `(IC1CON, RPINR7bits.IC1R, IEC0bits.IC1IE, IC1CONbits.ICM)`
 - Interrupts
   ```c
   
@@ -56,7 +63,7 @@ Microphone Filter Controller is a C library that provides the functionality to t
   volatile unsigned long int time_current_click=0;
   volatile unsigned long int time_preivious_click=0;
   
-  //T2 interrupt we use overflow in Ic interrupt for debouncing
+  //T2 interrupt we use overflow in IC interrupt for debouncing
   void __attribute__((interrupt, auto_psv)) _T2Interrupt(void) {
       _T2IF = 0; // turn the interrupt flag back to 0
       overflow++; // and increase the overflow by one
